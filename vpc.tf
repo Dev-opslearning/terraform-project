@@ -1,4 +1,4 @@
-resource "aws_vpc" "test-vpc" {
+resource "aws_vpc" "test_vpc" {
     cidr_block  = "10.0.0.0/16"
     tags        = {
     Name        = "terraform-proj"
@@ -24,19 +24,26 @@ resource "aws_internet_gateway" "igw" {
     vpc_id = aws_vpc.test-vpc.id
   
 }
+
 resource "aws_eip" "elastic-ip" {
   instance = aws_instance.ec2.id
   domain   = "vpc"
 }
+
+resource "aws_eip" "nat_gateway" {
+  domain   = "vpc"
+}
+
 resource "aws_nat_gateway" "ngw" {
-  allocation_id = aws_eip.elastic-ip.id
+  allocation_id = aws_eip.nat_gateway.id
   subnet_id     = aws_subnet.private.id
 
   tags = {
     Name = "gw NAT"
   }
 }  
-  resource "aws_route_table" "rt1" {
+
+resource "aws_route_table" "rt1" {
   vpc_id = aws_vpc.test-vpc.id
 
   route {

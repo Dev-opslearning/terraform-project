@@ -8,6 +8,7 @@ resource "aws_instance" "private_ec2" {
   key_name      = "ec2-keypair"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.private.id
+  associate_public_ip_address = true
 tags = {
     Name = "private-ec2"
 }

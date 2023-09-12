@@ -1,25 +1,27 @@
 resource "aws_vpc" "test-vpc" {
-    cidr_block = "10/0.0.0/16"
-  
+    cidr_block  = "10.0.0.0/16"
+    tags        = {
+    Name        = "terraform-proj"
+  }
 }
 resource "aws_subnet" "private" {
-    vpc_id = "aws_vpc.test-vpc.id"
-    cidr_block = "10.0.1.0/24"
-    tags = {
-      name = "private-sn"
+    vpc_id      = aws_vpc.test-vpc.id
+    cidr_block  = "10.0.1.0/24"
+    tags        = {
+        name = "private-sn"
     }
   
 }
 resource "aws_subnet" "public" {
-    vpc_id = "aws_vpc.test-vpc.id"
-    cidr_block = "10.0.3.0/24"
+    vpc_id      = aws_vpc.test-vpc.id
+    cidr_block  = "10.0.3.0/24"
     tags = {
       name = "public-sn"
     }
   
 }
 resource "aws_internet_gateway" "igw" {
-    vpc_id = "aws_vpc.test-vpc.id"
+    vpc_id = aws_vpc.test-vpc.id
   
 }
 resource "aws_eip" "elastic-ip" {

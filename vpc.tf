@@ -5,7 +5,7 @@ resource "aws_vpc" "test_vpc" {
   }
 }
 resource "aws_subnet" "private" {
-  vpc_id     = aws_vpc.test-vpc.id
+  vpc_id     = aws_vpc.test_vpc.id
   cidr_block = "10.0.1.0/24"
   tags = {
     name = "private-sn"
@@ -13,7 +13,7 @@ resource "aws_subnet" "private" {
 
 }
 resource "aws_subnet" "public" {
-  vpc_id     = aws_vpc.test-vpc.id
+  vpc_id     = aws_vpc.test_vpc.id
   cidr_block = "10.0.3.0/24"
   tags = {  
     name = "public-sn"
@@ -21,7 +21,7 @@ resource "aws_subnet" "public" {
 
 }
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.test-vpc.id
+  vpc_id = aws_vpc.test_vpc.id
 
 }
 
@@ -39,7 +39,7 @@ resource "aws_nat_gateway" "ngw" {
 }
 
 resource "aws_route_table" "rt1" {
-  vpc_id = aws_vpc.test-vpc.id
+  vpc_id = aws_vpc.test_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -48,7 +48,7 @@ resource "aws_route_table" "rt1" {
 }
 
 resource "aws_route_table" "rt2" {
-  vpc_id = aws_vpc.test-vpc.id
+  vpc_id = aws_vpc.test_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -68,13 +68,13 @@ resource "aws_route_table_association" "rts2" {
 }
 resource "aws_security_group" "sg" {
   name   = "first-sg"
-  vpc_id = aws_vpc.test-vpc.id
+  vpc_id = aws_vpc.test_vpc.id
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [aws_vpc.test-vpc.cidr_block]
+    cidr_blocks = [aws_vpc.test_vpc.cidr_block]
 
   }
   egress {

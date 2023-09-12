@@ -1,28 +1,28 @@
 resource "aws_vpc" "test_vpc" {
-    cidr_block  = "10.0.0.0/16"
-    tags        = {
-    Name        = "terraform-proj"
+  cidr_block = "10.0.0.0/16"
+  tags = {
+    Name = "terraform-proj"
   }
 }
 resource "aws_subnet" "private" {
-    vpc_id      = aws_vpc.test-vpc.id
-    cidr_block  = "10.0.1.0/24"
-    tags        = {
-        name = "private-sn"
-    }
-  
+  vpc_id     = aws_vpc.test-vpc.id
+  cidr_block = "10.0.1.0/24"
+  tags = {
+    name = "private-sn"
+  }
+
 }
 resource "aws_subnet" "public" {
-    vpc_id      = aws_vpc.test-vpc.id
-    cidr_block  = "10.0.3.0/24"
-    tags = {
-      name = "public-sn"
-    }
-  
+  vpc_id     = aws_vpc.test-vpc.id
+  cidr_block = "10.0.3.0/24"
+  tags = {
+    name = "public-sn"
+  }
+
 }
 resource "aws_internet_gateway" "igw" {
-    vpc_id = aws_vpc.test-vpc.id
-  
+  vpc_id = aws_vpc.test-vpc.id
+
 }
 
 resource "aws_eip" "elastic-ip" {
@@ -31,7 +31,7 @@ resource "aws_eip" "elastic-ip" {
 }
 
 resource "aws_eip" "nat_gateway" {
-  domain   = "vpc"
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "ngw" {
@@ -41,16 +41,17 @@ resource "aws_nat_gateway" "ngw" {
   tags = {
     Name = "gw NAT"
   }
-}  
+}
 
 resource "aws_route_table" "rt1" {
   vpc_id = aws_vpc.test-vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id    
+    gateway_id = aws_internet_gateway.igw.id
   }
 }
+
 resource "aws_route_table" "rt2" {
   vpc_id = aws_vpc.test-vpc.id
 
@@ -59,6 +60,7 @@ resource "aws_route_table" "rt2" {
     gateway_id = aws_nat_gateway.ngw.id
   }
 }
+
 resource "aws_route_table_association" "rts1" {
   subnet_id      = aws_subnet.private.id
   route_table_id = aws_route_table.rt1.id

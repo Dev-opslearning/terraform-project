@@ -8,7 +8,7 @@ resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.test_vpc.id
   cidr_block = "10.0.1.0/24"
   tags = {
-    name = "private-sn"
+    Name = "private-sn"
   }
 
 }
@@ -16,7 +16,7 @@ resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.test_vpc.id
   cidr_block = "10.0.3.0/24"
   tags = {  
-    name = "public-sn"
+    Name = "public-sn"
   }
 
 }
@@ -59,13 +59,13 @@ resource "aws_route_table" "rt2" {
 resource "aws_route_table_association" "rts1" {
   subnet_id      = aws_subnet.private.id
   route_table_id = aws_route_table.rt1.id
-
 }
+
 resource "aws_route_table_association" "rts2" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.rt2.id
-
 }
+
 resource "aws_security_group" "sg" {
   name   = "first-sg"
   vpc_id = aws_vpc.test_vpc.id
@@ -84,6 +84,6 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    name = "first-sg"
+    Name = "first-sg"
   }
 }

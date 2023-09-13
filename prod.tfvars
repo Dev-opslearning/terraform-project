@@ -1,4 +1,4 @@
-instance_type       = "t3.micro"
+instance_type       = "t2.micro"
 environment_name    = "prod"
 resource_name       = "prod"
 vpc_cidr_block      = "11.0.0.0/16"

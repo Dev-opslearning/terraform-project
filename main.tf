@@ -1,6 +1,11 @@
+terraform {
+  backend "local" {
+    path = "./${var.resource_name}.tfstate"
+  }
+}
+
 provider "aws" {
   region = "us-east-1"
-
 }
 
 resource "aws_instance" "private_ec2" {

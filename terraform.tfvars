@@ -1,9 +1,0 @@
-instance_type       = "t2.micro"
-environment_name    = "dev"
-resource_name       = "dev"
-vpc_cidr_block      = "10.0.0.0/16"
-private_subnet_cidr = "10.0.1.0/24"
-public_subnet_cidr  = "10.0.3.0/24"
-route1_cidr_block   = "0.0.0.0/0"
-route2_cidr_block   = "0.0.0.0/0"
-egress_cidr         = ["0.0.0.0/0"]

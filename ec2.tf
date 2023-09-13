@@ -9,3 +9,5 @@ resource "aws_instance" "private_ec2" {
   tags = {
     Name = var.environment_name
   }
+  
+}  

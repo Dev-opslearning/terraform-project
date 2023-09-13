@@ -27,8 +27,8 @@ variable "route2_cidr_block" {
 }
 variable "egress_cidr" {
   description = "CIDR block for egress_outbound-rule"
-  type = string
-  default = "0.0.0.0/0"
+  type        = string
+  default     = "0.0.0.0/0"
   
 }
 

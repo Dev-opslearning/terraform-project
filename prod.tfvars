@@ -1,0 +1,9 @@
+instance_type       = "t3.micro"
+environment_name    = "prod"
+resource_name       = "prod"
+vpc_cidr_block      = "11.0.0.0/16"
+private_subnet_cidr = "11.0.1.0/24"
+public_subnet_cidr  = "11.0.3.0/24"
+route1_cidr_block   = "0.0.0.0/0"
+route2_cidr_block   = "0.0.0.0/0"
+egress_cidr         = ["0.0.0.0/0"]

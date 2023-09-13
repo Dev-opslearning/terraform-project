@@ -5,8 +5,8 @@ variable "instance_type" {
 variable "environment_name" {
         type = string
 }
+
 variable "resource_name" {
     type = string
-    description = "to name aws_resources"
-  
+    description = "to name aws_resources" 
 }

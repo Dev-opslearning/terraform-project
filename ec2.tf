@@ -8,6 +8,7 @@ resource "aws_instance" "private_ec2" {
   instance_type = var.instance_type
   tags = {
     Name = var.environment_name
+    Name = "terraform_instance"
   }
   
 }  

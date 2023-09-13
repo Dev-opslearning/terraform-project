@@ -11,7 +11,7 @@ resource "aws_instance" "private_ec2" {
   associate_public_ip_address = true
 tags = {
     Name = "private-ec2"
-    Environment1 = var.environment1_name
+    Environment = var.environment_name
 }
 }
 
@@ -23,7 +23,7 @@ resource "aws_instance" "public_ec2" {
   associate_public_ip_address = true
   tags = {
     Name = "public-ec2"
-    Environment2 = var.environment2_name
+    Environment = var.environment_name
   }
 }
 

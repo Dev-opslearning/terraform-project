@@ -29,14 +29,11 @@ variable "instance_type" {
         type = string
 }
 
-variable "environment1_name" {
+variable "environment_name" {
         description = "name for instance"
         type = string
 }
-variable "environment2_name" {
-        description = "name for instance"
-        type = string
-}
+
 variable "resource_name" {
     description = "to name aws_resources"
     type = string

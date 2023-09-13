@@ -1,14 +1,14 @@
 resource "aws_vpc" "test_vpc" {
   cidr_block = var.vpc_cidr_block
   tags = {
-    Name = "terraform-proj"
+    Name = "${var.resource_name}_vpc"
   }
 }
 resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.test_vpc.id
   cidr_block = var.private_subnet_cidr
   tags = {
-    Name = "private-sn"
+    Name = "${var.resource_name}_private_sn"
   }
 
 }
@@ -16,17 +16,21 @@ resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.test_vpc.id
   cidr_block = var.public_subnet_cidr
   tags = {  
-    Name = "public-sn"
+    Name = "${var.resource_name}_public_sn"
   }
-
 }
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.test_vpc.id
-
+  tags = {  
+    Name = "${var.resource_name}_igw"
+  }
 }
 
 resource "aws_eip" "elastic-ip" {
   domain   = "vpc"
+  tags = {  
+    Name = "${var.resource_name}_eip"
+  }
 }
 
 resource "aws_nat_gateway" "ngw" {
@@ -34,7 +38,7 @@ resource "aws_nat_gateway" "ngw" {
   subnet_id     = aws_subnet.public.id
 
   tags = {
-    Name = "gw NAT"
+    Name = "${var.resource_name}_ngw"
   }
 }
 
@@ -67,7 +71,7 @@ resource "aws_route_table_association" "rts2" {
 }
 
 resource "aws_security_group" "sg" {
-  name   = "first-sg"
+  name   = "${var.resource_name}_sg"
   vpc_id = aws_vpc.test_vpc.id
 
   ingress {
@@ -84,6 +88,6 @@ resource "aws_security_group" "sg" {
     cidr_blocks = var.egress_cidr
   }
   tags = {
-    Name = "first-sg"
+    Name = "${var.resource_name}_sg"
   }
 }

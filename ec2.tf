@@ -7,8 +7,8 @@ resource "aws_instance" "private_ec2" {
   key_name      = "ec2-keypair"
   instance_type = var.instance_type
   tags = {
-    Name = var.environment_name
-    Name = "terraform_instance"
-  }
+    Environment = var.environment_name
+    Name = "${var.resource_name}_instance"
+}  
   
 }  
